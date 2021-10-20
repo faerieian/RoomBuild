@@ -1,7 +1,14 @@
+########################################
+# Unreal Generated Files ###############
+#######################################
 Binaries
 DerivedDataCache
 Intermediate
 Saved
+StarterContent
+#####################################
+#####################################
+### VS Generated Files ##############
 .vscode
 .vs
 *.VC.db
@@ -12,4 +19,3 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
-StarterContent
