@@ -4,6 +4,7 @@
 #include "PositionReport.h"
 #include "Gameframework/Actor.h"
 
+
 // Sets default values for this component's properties
 UPositionReport::UPositionReport()
 {
@@ -23,7 +24,13 @@ void UPositionReport::BeginPlay()
 
 	
 	FString ObjectName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Position Report reporting for %s"), *ObjectName);
+
+	//*My first try and it work hahaha*//
+	/*FVector ObjectPos = GetOwner()->GetActorLocation();
+	UE_LOG(LogTemp, Warning, TEXT("%s for %s"), *ObjectName, *ObjectPos.ToString());*/
+
+	FString ObjectPos = GetOwner()->GetTransform().GetLocation().ToCompactString();
+	UE_LOG(LogTemp, Warning, TEXT("%s for %s"), *ObjectName, *ObjectPos);
 	
 	
 }
