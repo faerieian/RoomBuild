@@ -2,6 +2,7 @@
 
 
 #include "PositionReport.h"
+#include "Gameframework/Actor.h"
 
 // Sets default values for this component's properties
 UPositionReport::UPositionReport()
@@ -11,7 +12,7 @@ UPositionReport::UPositionReport()
 	
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	
 }
 
 
@@ -20,7 +21,10 @@ void UPositionReport::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	
+	FString ObjectName = GetOwner()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Position Report reporting for %s"), *ObjectName);
+	
 	
 }
 
