@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
+#include "Misc/DateTime.h"
 #include "OpenDoor.generated.h"
 
 
@@ -23,12 +24,14 @@ protected:
 
 	void OpenDoor()
 	{
-		// Find the owning Actor
-		AActor* Owner = GetOwner();
-		// Create a rotator
-		FRotator NewRotation = FRotator(0.f, 60.f, 0.f);
-		// Set the door rotation
-		Owner->SetActorRotation(NewRotation);
+
+		Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
+	}
+
+	void CloseDoor()
+	{
+
+		Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 	}
 
 public:	
@@ -37,13 +40,17 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	float OpenAngle = 90.0f;
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
-	//UPROPERTY(EditAnywhere)
-		AActor* ActorThatOpens;// Remember pawn inherits from actor
-		
+	UPROPERTY(EditAnywhere)
+	float DoorCloseDelay =1.f;
+
+	float LastDoorOpenTime;
+
+	AActor* ActorThatOpens;// Remember pawn inherits from actor
+	AActor* Owner; // the owning door
 };
