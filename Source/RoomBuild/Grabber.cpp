@@ -36,6 +36,8 @@ void UGrabber::BeginPlay()
 void UGrabber::FindPhysicsHandleComponent()
 {
 	/// Look for attached Physics Handle
+
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (PhysicsHandle == nullptr)
 	{
@@ -79,6 +81,7 @@ void UGrabber::Grab()
 		///	true); // allow rotation
 
 		/// this my try to write method by myself haha
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab, // turn out to be the mesh
 			NAME_None, // no bones needed
@@ -140,7 +143,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab released "));
-	/// TODO release physics handle
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
@@ -153,6 +156,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
+	if (!PhysicsHandle) { return; }
 	// if the physics handle is attached
 	if (PhysicsHandle->GrabbedComponent)
 	{
