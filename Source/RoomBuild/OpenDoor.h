@@ -6,33 +6,31 @@
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
 #include "Misc/DateTime.h"
+#include "Delegates/Delegate.h"
 #include "OpenDoor.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ROOMBUILD_API UOpenDoor : public UActorComponent
 {
 	GENERATED_BODY()
-
+		
 public:	
 	// Sets default values for this component's properties
 	UOpenDoor();
 
+	UPROPERTY(BlueprintAssignable);
+	FDoorEvent OnOpen;
+
+	UPROPERTY(BlueprintAssignable);
+	FDoorEvent OnClose;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	void OpenDoor()
-	{
-
-		Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
-	}
-
-	void CloseDoor()
-	{
-
-		Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-	}
+	
 
 public:	
 	// Called every frame
@@ -40,16 +38,14 @@ public:
 
 private:
 
-	UPROPERTY(EditAnywhere)
-	float OpenAngle = 90.0f;
+
 	
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	float DoorCloseDelay =1.f;
+	float TriggerMass = 30.f;
 
-	float LastDoorOpenTime;
 
 	//AActor* ActorThatOpens;// Remember pawn inherits from actor
 	AActor* Owner = nullptr; // the owning door

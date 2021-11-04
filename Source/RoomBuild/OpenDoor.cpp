@@ -40,17 +40,15 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// Poll the trigger Volume
-	if (GetTotalMassOfActorsOnPlate() > 30.f) 
+	if (GetTotalMassOfActorsOnPlate() > TriggerMass) 
 	{
 
-	OpenDoor();
-	LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+	OnOpen.Broadcast();
 
 	}
-	// check if it's time to close the door
-	if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime > DoorCloseDelay)
+	else
 	{
-		CloseDoor();
+		OnClose.Broadcast();
 	}
 }
 

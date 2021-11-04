@@ -37,7 +37,6 @@ void UGrabber::FindPhysicsHandleComponent()
 {
 	/// Look for attached Physics Handle
 
-	if (!PhysicsHandle) { return; }
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (PhysicsHandle == nullptr)
 	{
@@ -63,7 +62,7 @@ void UGrabber::SetupInputComponent()
 }
 void UGrabber::Grab()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Grab pressed "));
+	UE_LOG(LogTemp, Warning, TEXT("Grab pressed "));
 
 	/// Line TRACE and see if we reach any actors with physics body collision channel set 
 	auto HitResult = GetFirstPhysicsBodyInReach();
@@ -143,7 +142,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab released "));
-	if (!PhysicsHandle) { return; }
+	//if (!PhysicsHandle) { return; }
 	PhysicsHandle->ReleaseComponent();
 }
 
