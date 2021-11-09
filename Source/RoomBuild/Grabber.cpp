@@ -73,19 +73,19 @@ void UGrabber::Grab()
 	if (ActorHit)
 	{
 		/// this function Ben teach me but i have too change by myself because unreal warning project will no longer compile sorry ben
-		/// PhysicsHandle->GrabComponent(
-		///	ComponentToGrab, // turn out to be the mesh
-		///	NAME_None, // no bones needed
-		///	ComponentToGrab->GetOwner()->GetActorLocation(),
-		///	true); // allow rotation
-
-		/// this my try to write method by myself haha
-		if (!PhysicsHandle) { return; }
-		PhysicsHandle->GrabComponentAtLocationWithRotation(
+		 PhysicsHandle->GrabComponent(
 			ComponentToGrab, // turn out to be the mesh
 			NAME_None, // no bones needed
 			ComponentToGrab->GetOwner()->GetActorLocation(),
-			ComponentToGrab->GetOwner()->GetActorRotation());
+			true); // allow rotation
+
+		/// this my try to write method by myself haha
+		if (!PhysicsHandle) { return; }
+		//PhysicsHandle->GrabComponentAtLocationWithRotation(
+		//	ComponentToGrab, // turn out to be the mesh
+		//	NAME_None, // no bones needed
+		//	ComponentToGrab->GetOwner()->GetActorLocation(),
+		//	ComponentToGrab->GetOwner()->GetActorRotation());
 	}
 	
 }
